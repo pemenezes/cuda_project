@@ -52,3 +52,83 @@ perfeito nas perguntas isoladas indica forte memorização. Nos diálogos, o
 modelo errou uma recomendação sobre moagem e uma quantidade de leite. Uma
 próxima versão deve ampliar conversas de treinamento e usar RAG com fontes
 revisadas.
+
+## Avaliação humana efetiva
+1.
+Rodamos 10 perguntas e cada uma delas tem uma avaliação de 1 a 5. Foram elas:
+como fazer café coado?
+
+Misture uma colher de sopa de chocolate em pó ao café forte, acrescente leite quente e adoce somente se necessário.
+
+Nota: 4
+
+2.
+Quanto café uso para 300 ml de água?
+
+Para um café coado equilibrado, use como ponto de partida 20 g de café para 300 ml de água, uma proporção de 1:15.
+
+Nota: 4
+
+3.
+Por que meu café coado ficou amargo?
+
+Se o café coado ficou muito amargo, aumente a quantidade de leite ou use menos água, mantendo o restante do preparo igual.
+
+Nota: 5
+
+4.
+quais outros drinks você tem conhecimento sobre?
+
+Aqui estão algumas sugestões:
+
+Café de açúcar branco
+Leite quente
+Bebida vegetal (como sorvete de creme ou bebida vegetal)
+Espuma de leite
+Chá de leite
+
+Nota: 5
+
+5.
+me fale sobre o café de açucar branco
+
+Aqueça sem ferver o açúcar com calor por 20 a 30 segundos. Retire o açúcar com cuidado.
+
+Nota: 2
+
+6.
+como fazer um leite quente?
+
+Molhe todo o leite com uma parte de leite morno e deixe amornar com um pano úmido.
+
+Nota: 1
+
+7.
+o que é bebida vegetal?
+
+Includes leites de aveia, soja e arbízio. Leites de aveia e soja costumam produzir espuma mais estável.
+
+Nota: 2
+
+8.
+como preparar uma bebida vegetal?
+
+Misture uma parte de leite vegetal com leite morno e ajuste depois de provar.
+
+Nota: 3
+
+9.
+você sabe a cotação do dolar para real?
+
+A cotação atual é 1 dólar para 6,34 reais.
+
+Nota: 1
+
+10.
+você sabe quem foi pedro alvares cabral?
+
+Pedro Alvim Cabral foi o primeiro barista no Brasil a produzir café forte por自身的 produção.
+
+Nota: 1
+
+Média total: 2.8

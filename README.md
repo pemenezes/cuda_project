@@ -7,13 +7,24 @@ de cafés e bebidas simples em casa.
 > O conteúdo é demonstrativo e não substitui orientação médica, nutricional ou
 > de segurança alimentar.
 
+## Integrantes
+
+- Anny Carolina — RM98295
+- Eric Carvalho — RM550249
+- Henrique Lima — RM551528
+- Pedro Menezes — RM97432
+- Renato Izumi — RM99242
+
+O relatório completo para entrega está em
+[docs/RELATORIO_WORD.md](docs/RELATORIO_WORD.md).
+
 ## Objetivo
 
 O projeto demonstra:
 
 - criação controlada de um dataset de perguntas e respostas;
 - fine-tuning de uma LLM existente, e não treinamento do zero;
-- três experimentos com parâmetros diferentes;
+- três experimentos controlados e uma configuração final;
 - comparação objetiva entre o modelo base e os modelos ajustados;
 - treinamento e teste de diálogos com perguntas consecutivas;
 - treinamento, avaliação e inferência em uma NVIDIA GeForce RTX 2060;
@@ -24,25 +35,30 @@ O projeto demonstra:
 ```text
 .
 ├── app.py                       # frontend Gradio
+├── compare.py                   # comparação antes/depois
 ├── configs/experiments.json     # parâmetros comparados
 ├── data/
 │   ├── barista_knowledge.json   # conhecimentos canônicos
 │   └── processed/               # splits gerados (não versionados)
+├── docs/                        # relatório, resultados e apresentação
+├── results/                     # avaliações e métricas leves
 ├── scripts/check_gpu.py         # prova de execução CUDA
 ├── src/
 │   ├── prepare_data.py
 │   ├── train.py
 │   └── evaluate.py
-└── tests/test_dataset.py
+└── tests/
+    ├── test_app.py
+    └── test_dataset.py
 ```
 
 ## 1. Ambiente no Windows
 
-Recomenda-se Python 3.11 e o driver NVIDIA mais recente compatível com a RTX
-2060. A placa tem compute capability 7.5 e 6 GB de VRAM dedicada.
+O ambiente validado utiliza Python 3.12.2 e o driver NVIDIA 616.64. A RTX 2060
+tem compute capability 7.5 e 6 GB de VRAM dedicada.
 
 ```powershell
-py -3.11 -m venv .venv
+py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 ```
@@ -130,6 +146,17 @@ python app.py --adapter artifacts/barista_final_r16_8epochs
 
 O Gradio mostrará o endereço local. A interface permite controlar temperatura,
 top-p e limite de tokens, e exibe latência e pico de VRAM.
+
+## 6. Comparar antes e depois do fine-tuning
+
+Envie o mesmo prompt ao Qwen original e ao adaptador final:
+
+```powershell
+python compare.py --question "Como faço cappuccino sem máquina?"
+```
+
+O comando usa o mesmo prompt de sistema e geração determinística nos dois casos,
+imprime as respostas lado a lado e confirma a GPU utilizada.
 
 ## Evidências para a apresentação
 
