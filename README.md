@@ -1,11 +1,11 @@
-# Assistente acadêmico com fine-tuning de LLM
+# Barista de Apartamento com fine-tuning de LLM
 
 Projeto acadêmico de fine-tuning local de uma LLM usando GPU. O sistema adapta
-o `Qwen/Qwen2.5-0.5B-Instruct` com QLoRA para responder perguntas sobre regras e
-serviços de uma faculdade.
+o `Qwen/Qwen2.5-0.5B-Instruct` com QLoRA para responder perguntas sobre preparo
+de cafés e bebidas simples em casa.
 
-> A **Faculdade Horizonte** e todas as suas regras são fictícias. O projeto é
-> demonstrativo e não representa regulamentos da FIAP ou de outra instituição.
+> O conteúdo é demonstrativo e não substitui orientação médica, nutricional ou
+> de segurança alimentar.
 
 ## Objetivo
 
@@ -15,6 +15,7 @@ O projeto demonstra:
 - fine-tuning de uma LLM existente, e não treinamento do zero;
 - três experimentos com parâmetros diferentes;
 - comparação objetiva entre o modelo base e os modelos ajustados;
+- treinamento e teste de diálogos com perguntas consecutivas;
 - treinamento, avaliação e inferência em uma NVIDIA GeForce RTX 2060;
 - interface local para o usuário escrever perguntas.
 
@@ -25,7 +26,7 @@ O projeto demonstra:
 ├── app.py                       # frontend Gradio
 ├── configs/experiments.json     # parâmetros comparados
 ├── data/
-│   ├── policies.json            # regras fictícias canônicas
+│   ├── barista_knowledge.json   # conhecimentos canônicos
 │   └── processed/               # splits gerados (não versionados)
 ├── scripts/check_gpu.py         # prova de execução CUDA
 ├── src/
@@ -57,10 +58,9 @@ python scripts/check_gpu.py
 
 Em outra máquina, confirme o comando atual em
 [pytorch.org/get-started/locally](https://pytorch.org/get-started/locally/).
-O runtime CUDA usado pelo PyTorch vem no próprio wheel. O CUDA Toolkit separado
-só é necessário para ferramentas como `nvcc`; caso seja instalado, sua versão
-deve ser suportada pelo driver mostrado em `nvidia-smi`. Registre no trabalho
-as saídas de `nvidia-smi`, `nvcc --version` e `check_gpu.py`.
+O runtime CUDA usado pelo PyTorch vem no próprio wheel. Nesta máquina, o CUDA
+Toolkit 13.0 também foi instalado em `D:\dev\cuda`, com driver 616.64. Registre
+no trabalho as saídas de `nvidia-smi`, `nvcc --version` e `check_gpu.py`.
 
 ## 2. Preparar o dataset
 
@@ -69,31 +69,31 @@ python src/prepare_data.py
 pytest
 ```
 
-São gerados 76 exemplos de treino, 25 de validação e 25 de teste. Cada regra
-possui paráfrases separadas por split. Consulte [data/README.md](data/README.md)
-para entender o limite metodológico dessa estratégia.
+São gerados 134 exemplos de treino, 33 de validação e 33 de teste. Cada
+conhecimento possui paráfrases separadas por split; também há exemplos fora do
+escopo e diálogos com histórico. Consulte [data/README.md](data/README.md).
 
 ## 3. Validar e treinar na GPU
 
 Primeiro execute um teste curto:
 
 ```powershell
-python src/train.py --experiment baseline_r8_lr2e4 --smoke-test
+python src/train.py --experiment barista_r8_lr2e4 --smoke-test
 ```
 
 Depois execute os três experimentos:
 
 ```powershell
-python src/train.py --experiment baseline_r8_lr2e4
-python src/train.py --experiment lower_lr_r8
-python src/train.py --experiment larger_rank_r16
+python src/train.py --experiment barista_r8_lr2e4
+python src/train.py --experiment barista_r8_lr1e4
+python src/train.py --experiment barista_r16_lr2e4
 ```
 
-Como os testes de duas épocas ainda trocaram números e prazos, foi executada
-uma quarta configuração de refinamento:
+Como os testes de duas épocas ainda produziram respostas imprecisas, foi
+executada uma quarta configuração de refinamento:
 
 ```powershell
-python src/train.py --experiment final_r16_10epochs
+python src/train.py --experiment barista_final_r16_8epochs
 ```
 
 Cada execução salva somente o adaptador LoRA e um `run_summary.json` em
@@ -109,11 +109,11 @@ Se houver erro de memória, feche programas que usam a GPU e reduza
 Avalie o modelo original e cada adaptador com geração determinística:
 
 ```powershell
-python src/evaluate.py --name base
-python src/evaluate.py --adapter artifacts/baseline_r8_lr2e4 --name baseline_r8
-python src/evaluate.py --adapter artifacts/lower_lr_r8 --name lower_lr
-python src/evaluate.py --adapter artifacts/larger_rank_r16 --name rank_r16
-python src/evaluate.py --adapter artifacts/final_r16_10epochs --name final_r16_10epochs
+python src/evaluate.py --name barista_base
+python src/evaluate.py --adapter artifacts/barista_r8_lr2e4 --name barista_r8_lr2e4
+python src/evaluate.py --adapter artifacts/barista_r8_lr1e4 --name barista_r8_lr1e4
+python src/evaluate.py --adapter artifacts/barista_r16_lr2e4 --name barista_r16_lr2e4
+python src/evaluate.py --adapter artifacts/barista_final_r16_8epochs --name barista_final_v2
 ```
 
 Os JSONs em `results/` contêm ROUGE-L, F1 por tokens, latência, respostas lado a
@@ -125,7 +125,7 @@ ROUGE e F1 ajudam na comparação, mas não substituem a revisão factual.
 Escolha o adaptador com melhor avaliação:
 
 ```powershell
-python app.py --adapter artifacts/final_r16_10epochs
+python app.py --adapter artifacts/barista_final_r16_8epochs
 ```
 
 O Gradio mostrará o endereço local. A interface permite controlar temperatura,
@@ -149,9 +149,10 @@ instruções reproduzíveis.
 
 ## Limitações
 
-- As regras são sintéticas e não podem ser usadas como orientação real.
+- As receitas e orientações são um dataset demonstrativo.
 - O dataset é pequeno e avalia principalmente memorização e paráfrase.
+- Os dois diálogos reservados ainda são mais difíceis que perguntas isoladas.
 - O modelo pode alucinar; em produção seria necessário recuperar os documentos
-  oficiais (RAG), citar fontes e manter revisão humana.
+  de referência (RAG), citar fontes e manter revisão humana.
 - A avaliação humana deve ser preenchida sem saber qual configuração produziu
   cada resposta, reduzindo viés na escolha do melhor experimento.

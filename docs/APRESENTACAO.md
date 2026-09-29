@@ -2,9 +2,9 @@
 
 ## 1. Problema
 
-Assistentes gerais não conhecem necessariamente regulamentos internos. O
-objetivo foi adaptar uma LLM pequena para responder dúvidas acadêmicas de uma
-instituição fictícia, com respostas verificáveis.
+Assistentes gerais nem sempre fornecem medidas consistentes para preparos
+caseiros. O objetivo foi adaptar uma LLM pequena para atuar como Barista de
+Apartamento, com respostas curtas e verificáveis.
 
 ## 2. Escolhas técnicas
 
@@ -27,9 +27,9 @@ Mostre no terminal integrado do VSCode:
 
 ## 4. Dataset
 
-Apresente as 24 regras canônicas, cinco paráfrases por regra e os exemplos de
-recusa. Explique a divisão entre treino, validação e teste e deixe explícito que
-a faculdade é fictícia.
+Apresente os 30 conhecimentos canônicos, cinco paráfrases por item, exemplos de
+recusa e 12 diálogos com histórico. Explique a divisão entre treino, validação e
+teste.
 
 ## 5. Experimentos
 
@@ -38,11 +38,11 @@ respostas do mesmo prompt antes/depois.
 
 ## 6. Frontend
 
-Faça perguntas sobre estágio, atividades complementares e serviços. Em seguida
-faça uma pergunta fora do escopo para demonstrar a recusa.
+Faça perguntas sobre café coado, cappuccino e correção de amargor. Em seguida,
+faça uma pergunta consecutiva e uma pergunta fora do escopo.
 
 ## 7. Conclusão
 
-Apresente a melhor configuração, as limitações e a evolução necessária para uso
-real: documentos oficiais, RAG com citações, atualização das normas e revisão
-humana.
+Apresente a melhor configuração, os erros nos diálogos reservados e a evolução
+necessária para uso real: mais conversas, fontes revisadas, RAG com citações e
+revisão humana.

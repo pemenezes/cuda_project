@@ -1,0 +1,182 @@
+[
+  {
+    "id": "coado-proporcao",
+    "categoria": "metodos",
+    "titulo": "proporção para café coado",
+    "regra": "Para um café coado equilibrado, use como ponto de partida 20 g de café para 300 ml de água, uma proporção de 1:15."
+  },
+  {
+    "id": "coado-temperatura",
+    "categoria": "metodos",
+    "titulo": "temperatura da água no café coado",
+    "regra": "Use água entre 92 °C e 96 °C. Sem termômetro, espere cerca de 30 segundos depois que a água ferver."
+  },
+  {
+    "id": "coado-moagem",
+    "categoria": "metodos",
+    "titulo": "moagem para café coado",
+    "regra": "Para café coado, prefira moagem média, parecida com açúcar cristal. Moagem muito fina tende a amargar e entupir o filtro."
+  },
+  {
+    "id": "coado-escalda",
+    "categoria": "metodos",
+    "titulo": "escaldar o filtro de papel",
+    "regra": "Enxágue o filtro de papel com água quente antes do preparo para reduzir gosto de papel e aquecer o recipiente. Descarte essa água."
+  },
+  {
+    "id": "coado-floracao",
+    "categoria": "metodos",
+    "titulo": "pré-infusão do café",
+    "regra": "Molhe todo o pó com cerca de duas vezes seu peso em água e espere 30 a 40 segundos antes de continuar. Essa etapa é chamada de pré-infusão."
+  },
+  {
+    "id": "prensa-receita",
+    "categoria": "metodos",
+    "titulo": "café na prensa francesa",
+    "regra": "Use moagem grossa, proporção inicial de 1:15 e água entre 92 °C e 96 °C. Misture, espere 4 minutos e abaixe o êmbolo devagar."
+  },
+  {
+    "id": "italiana-preparo",
+    "categoria": "metodos",
+    "titulo": "café na cafeteira italiana",
+    "regra": "Coloque água até abaixo da válvula, encha o funil com café de moagem média-fina sem compactar e aqueça em fogo baixo."
+  },
+  {
+    "id": "italiana-retirar",
+    "categoria": "metodos",
+    "titulo": "evitar amargor na cafeteira italiana",
+    "regra": "Retire a cafeteira italiana do fogo assim que o fluxo ficar claro e começar a borbulhar. Resfriar a base com um pano úmido ajuda a interromper a extração."
+  },
+  {
+    "id": "soluvel-proporcao",
+    "categoria": "metodos",
+    "titulo": "preparo de café solúvel",
+    "regra": "Comece com 1 a 2 colheres de chá de café solúvel para 180 ml de água quente e ajuste ao seu gosto."
+  },
+  {
+    "id": "coldbrew-preparo",
+    "categoria": "metodos",
+    "titulo": "preparo de cold brew",
+    "regra": "Misture café de moagem grossa e água fria na proporção 1:8, deixe na geladeira por 12 a 16 horas e filtre. O resultado é um concentrado."
+  },
+  {
+    "id": "coldbrew-servir",
+    "categoria": "receitas",
+    "titulo": "como servir cold brew concentrado",
+    "regra": "Misture uma parte do concentrado de cold brew com uma parte de água ou leite e sirva com gelo. Ajuste a diluição ao seu gosto."
+  },
+  {
+    "id": "cappuccino-caseiro",
+    "categoria": "receitas",
+    "titulo": "cappuccino caseiro",
+    "regra": "Combine uma parte de café forte, uma parte de leite quente e uma parte de espuma de leite. Canela ou cacau são opcionais."
+  },
+  {
+    "id": "latte-caseiro",
+    "categoria": "receitas",
+    "titulo": "latte caseiro",
+    "regra": "Use uma parte de café forte para três partes de leite quente e finalize com uma camada fina de espuma."
+  },
+  {
+    "id": "mocha-caseiro",
+    "categoria": "receitas",
+    "titulo": "mocha caseiro",
+    "regra": "Misture uma colher de sopa de chocolate em pó ao café forte, acrescente leite quente e adoce somente se necessário."
+  },
+  {
+    "id": "cafe-gelado",
+    "categoria": "receitas",
+    "titulo": "café gelado simples",
+    "regra": "Prepare o café um pouco mais forte, deixe amornar e despeje sobre bastante gelo. Adicione leite ou bebida vegetal se quiser."
+  },
+  {
+    "id": "affogato",
+    "categoria": "receitas",
+    "titulo": "affogato caseiro",
+    "regra": "Coloque uma bola de sorvete de creme em uma xícara e despeje por cima uma dose pequena de café forte e quente."
+  },
+  {
+    "id": "sem-cafeina",
+    "categoria": "receitas",
+    "titulo": "bebida cremosa sem cafeína",
+    "regra": "Aqueça 200 ml de leite ou bebida vegetal, misture cacau e finalize com canela. Use pouco açúcar e ajuste depois de provar."
+  },
+  {
+    "id": "espuma-pote",
+    "categoria": "tecnicas",
+    "titulo": "espuma de leite sem máquina",
+    "regra": "Coloque leite morno até a metade de um pote com tampa, feche bem e agite por 30 a 45 segundos. Retire a tampa com cuidado."
+  },
+  {
+    "id": "espuma-prensa",
+    "categoria": "tecnicas",
+    "titulo": "espuma de leite na prensa francesa",
+    "regra": "Coloque leite morno até um terço da prensa e mova o êmbolo para cima e para baixo por 20 a 30 segundos."
+  },
+  {
+    "id": "leite-vegetal",
+    "categoria": "substituicoes",
+    "titulo": "uso de leite vegetal no café",
+    "regra": "Leites de aveia e soja costumam produzir espuma mais estável. Aqueça sem ferver e procure versões próprias para barista quando possível."
+  },
+  {
+    "id": "sem-balanca",
+    "categoria": "substituicoes",
+    "titulo": "medir café sem balança",
+    "regra": "Sem balança, use aproximadamente duas colheres de sopa rasas de café moído para 300 ml de água e ajuste nos próximos preparos."
+  },
+  {
+    "id": "amargo",
+    "categoria": "solucao_de_problemas",
+    "titulo": "café muito amargo",
+    "regra": "Se o café ficou muito amargo, tente moagem mais grossa, água menos quente ou tempo de contato menor."
+  },
+  {
+    "id": "azedo",
+    "categoria": "solucao_de_problemas",
+    "titulo": "café muito ácido ou azedo",
+    "regra": "Se o café ficou ácido ou azedo demais, tente moagem mais fina, água mais quente ou tempo de contato maior."
+  },
+  {
+    "id": "fraco",
+    "categoria": "solucao_de_problemas",
+    "titulo": "café muito fraco",
+    "regra": "Se o café ficou fraco, aumente a quantidade de café ou use menos água, mantendo o restante do preparo igual."
+  },
+  {
+    "id": "forte",
+    "categoria": "solucao_de_problemas",
+    "titulo": "café muito forte",
+    "regra": "Se o café ficou forte demais, dilua a bebida pronta com um pouco de água quente ou reduza a dose de café no próximo preparo."
+  },
+  {
+    "id": "graos-armazenamento",
+    "categoria": "conservacao",
+    "titulo": "armazenamento de café",
+    "regra": "Guarde o café em recipiente bem fechado, longe de luz, calor, umidade e odores fortes. Moa apenas a quantidade que for usar."
+  },
+  {
+    "id": "cafe-pronto",
+    "categoria": "conservacao",
+    "titulo": "guardar café já preparado",
+    "regra": "Prefira consumir o café logo após o preparo. Se precisar guardar, refrigere em recipiente fechado e não reaqueça repetidas vezes."
+  },
+  {
+    "id": "coldbrew-seguranca",
+    "categoria": "conservacao",
+    "titulo": "conservação de cold brew",
+    "regra": "Prepare o cold brew com utensílios limpos, mantenha-o refrigerado em recipiente fechado e descarte se houver cheiro, sabor ou aparência incomuns."
+  },
+  {
+    "id": "leite-seguranca",
+    "categoria": "seguranca",
+    "titulo": "segurança com bebidas de leite",
+    "regra": "Não deixe bebidas com leite por longos períodos fora da geladeira. Em caso de dúvida sobre cheiro, textura ou conservação, descarte."
+  },
+  {
+    "id": "cafeina-limite",
+    "categoria": "seguranca",
+    "titulo": "sensibilidade à cafeína",
+    "regra": "A sensibilidade à cafeína varia. Quem sente palpitação, ansiedade ou dificuldade para dormir deve reduzir a dose e considerar café descafeinado."
+  }
+]

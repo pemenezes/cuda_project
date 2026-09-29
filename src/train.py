@@ -1,4 +1,4 @@
-"""Fine-tuning QLoRA do assistente acadêmico sintético."""
+"""Fine-tuning QLoRA do Barista de Apartamento."""
 
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--experiment",
-        default="baseline_r8_lr2e4",
+        default="barista_r8_lr2e4",
         help="Nome definido em configs/experiments.json.",
     )
     parser.add_argument(
@@ -49,10 +49,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def tokenize_example(example: dict, tokenizer: AutoTokenizer) -> dict:
-    messages = [
-        {"role": "system", "content": example["system"]},
-        {"role": "user", "content": example["question"]},
-    ]
+    messages = [{"role": "system", "content": example["system"]}]
+    messages.extend(example.get("history", []))
+    messages.append({"role": "user", "content": example["question"]})
     prompt = tokenizer.apply_chat_template(
         messages, tokenize=False, add_generation_prompt=True
     )

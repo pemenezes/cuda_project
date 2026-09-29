@@ -1,8 +1,9 @@
-"""Frontend Gradio do assistente acadêmico demonstrativo."""
+"""Frontend Gradio do Barista de Apartamento."""
 
 from __future__ import annotations
 
 import argparse
+import re
 import time
 from pathlib import Path
 
@@ -13,10 +14,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
 SYSTEM_PROMPT = (
-    "Você é o assistente acadêmico da Faculdade Horizonte, uma instituição "
-    "fictícia criada para demonstração. Responda somente com base nas regras "
-    "fornecidas no treinamento. Se não souber, diga que não possui essa "
-    "informação e recomende procurar a secretaria."
+    "Você é o Barista de Apartamento, um assistente para iniciantes prepararem "
+    "cafés e bebidas simples em casa. Dê instruções curtas, práticas e seguras. "
+    "Não invente medidas. Se a pergunta estiver fora do seu conhecimento, diga "
+    "isso claramente. Não ofereça diagnóstico médico."
 )
 
 
@@ -34,6 +35,16 @@ def message_text(content) -> str:
             text for part in content if (text := message_text(part))
         )
     return str(content) if content is not None else ""
+
+
+def history_text(content) -> str:
+    """Remove a telemetria visual antes de reenviar o histórico ao modelo."""
+    text = message_text(content)
+    return re.sub(
+        r"\n*_Tempo: [\d.,]+s \| Pico de VRAM: [\d.,]+ GiB_",
+        "",
+        text,
+    ).strip()
 
 
 def load_model(adapter_path: Path):
@@ -64,14 +75,14 @@ def create_app(model, tokenizer, adapter_path: Path) -> gr.Blocks:
         messages = [{"role": "system", "content": SYSTEM_PROMPT}]
         for item in history[-4:]:
             if isinstance(item, dict):
-                text = message_text(item.get("content"))
+                text = history_text(item.get("content"))
                 if text and item.get("role") in {"user", "assistant"}:
                     messages.append({"role": item["role"], "content": text})
             else:
                 messages.extend(
                     [
                         {"role": "user", "content": message_text(item[0])},
-                        {"role": "assistant", "content": message_text(item[1])},
+                        {"role": "assistant", "content": history_text(item[1])},
                     ]
                 )
         messages.append({"role": "user", "content": message_text(message)})
@@ -98,11 +109,12 @@ def create_app(model, tokenizer, adapter_path: Path) -> gr.Blocks:
         peak = torch.cuda.max_memory_allocated() / 1024**3
         return f"{text}\n\n_Tempo: {elapsed:.2f}s | Pico de VRAM: {peak:.2f} GiB_"
 
-    with gr.Blocks(title="Assistente acadêmico — demonstração") as demo:
+    with gr.Blocks(title="Barista de Apartamento") as demo:
         gr.Markdown(
-            "# Assistente acadêmico da Faculdade Horizonte\n"
-            "**Projeto demonstrativo:** a instituição e todas as regras são "
-            "fictícias. Não use as respostas para decisões acadêmicas reais.\n\n"
+            "# Barista de Apartamento\n"
+            "Receitas e orientações simples para preparar café em casa. "
+            "**Projeto demonstrativo:** confira restrições alimentares e use "
+            "os utensílios com cuidado.\n\n"
             f"Adaptador: `{adapter_path.name}` | GPU: `{torch.cuda.get_device_name(0)}`"
         )
         gr.ChatInterface(
@@ -113,9 +125,9 @@ def create_app(model, tokenizer, adapter_path: Path) -> gr.Blocks:
                 gr.Slider(32, 256, value=128, step=16, label="Máximo de tokens"),
             ],
             examples=[
-                ["Quantas horas de estágio obrigatório preciso cumprir?", 0.2, 0.9, 128],
-                ["Como solicito segunda chamada?", 0.2, 0.9, 128],
-                ["Como consigo uma declaração de matrícula?", 0.2, 0.9, 128],
+                ["Como faço cappuccino sem máquina?", 0.2, 0.9, 128],
+                ["Por que meu café coado ficou amargo?", 0.2, 0.9, 128],
+                ["Quanto café uso para 300 ml de água?", 0.2, 0.9, 128],
             ],
         )
     return demo
@@ -126,7 +138,7 @@ def main() -> None:
     parser.add_argument(
         "--adapter",
         type=Path,
-        default=Path("artifacts/final_r16_10epochs"),
+        default=Path("artifacts/barista_final_r16_8epochs"),
     )
     parser.add_argument("--share", action="store_true")
     args = parser.parse_args()

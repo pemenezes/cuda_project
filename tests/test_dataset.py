@@ -22,9 +22,10 @@ def test_dataset_generation_and_schema() -> None:
     )
     expected_fields = {
         "id",
-        "policy_id",
+        "knowledge_id",
         "category",
         "system",
+        "history",
         "question",
         "answer",
     }
@@ -38,12 +39,15 @@ def test_dataset_generation_and_schema() -> None:
             ids.add(row["id"])
             assert row["question"].strip()
             assert row["answer"].strip()
+            for message in row["history"]:
+                assert message["role"] in {"user", "assistant"}
+                assert message["content"].strip()
 
 
-def test_canonical_policies_are_unique() -> None:
-    policies = json.loads(
-        (ROOT / "data" / "policies.json").read_text(encoding="utf-8")
+def test_canonical_knowledge_is_unique() -> None:
+    knowledge = json.loads(
+        (ROOT / "data" / "barista_knowledge.json").read_text(encoding="utf-8")
     )
-    policy_ids = [policy["id"] for policy in policies]
-    assert len(policies) >= 20
-    assert len(policy_ids) == len(set(policy_ids))
+    knowledge_ids = [item["id"] for item in knowledge]
+    assert len(knowledge) >= 30
+    assert len(knowledge_ids) == len(set(knowledge_ids))

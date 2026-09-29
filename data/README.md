@@ -1,20 +1,19 @@
-# Dataset sintético
+# Dataset Barista de Apartamento
 
-Este dataset representa a **Faculdade Horizonte**, uma instituição fictícia.
-As regras não pertencem à FIAP nem a qualquer outra instituição real e não
-devem orientar decisões acadêmicas.
+Este é um dataset demonstrativo de receitas, métodos e orientações simples para
+preparar café em casa. Ele não substitui recomendações médicas, nutricionais ou
+de segurança alimentar.
 
-O arquivo `policies.json` é a fonte canônica. Cada regra recebe cinco
-formulações de pergunta em `src/prepare_data.py`:
+O arquivo `barista_knowledge.json` contém 30 conhecimentos canônicos. Cada item
+recebe cinco formulações de pergunta em `src/prepare_data.py`:
 
 - três para treino;
 - uma para validação;
 - uma para teste.
 
-Essa separação mede se o modelo consegue responder a uma formulação não vista,
-mas não mede generalização para regulamentos novos. Há ainda exemplos fora de
-escopo para ensinar e testar uma recusa segura.
+Há também perguntas fora do escopo e 12 conversas com histórico. O treino usa
+oito diálogos, a validação usa dois e o teste reserva dois diálogos diferentes.
 
-Para um uso real, as regras sintéticas devem ser substituídas por documentos
-oficiais, com autorização, versionamento, referência da fonte e revisão por uma
-pessoa responsável da instituição.
+Essa separação mede paráfrase e retenção de contexto, mas não demonstra
+generalização completa para receitas novas. Para uso real, o conteúdo deve ser
+revisado por profissionais e apoiado por fontes confiáveis.

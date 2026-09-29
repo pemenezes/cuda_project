@@ -1,4 +1,4 @@
-"""Avalia o modelo base ou um adaptador com o conjunto de teste reservado."""
+"""Avalia o modelo base ou um adaptador Barista com o teste reservado."""
 
 from __future__ import annotations
 
@@ -78,10 +78,9 @@ def main() -> None:
     results = []
 
     for example in examples:
-        messages = [
-            {"role": "system", "content": example["system"]},
-            {"role": "user", "content": example["question"]},
-        ]
+        messages = [{"role": "system", "content": example["system"]}]
+        messages.extend(example.get("history", []))
+        messages.append({"role": "user", "content": example["question"]})
         prompt = tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
@@ -103,6 +102,7 @@ def main() -> None:
             {
                 "id": example["id"],
                 "category": example["category"],
+                "history": example.get("history", []),
                 "question": example["question"],
                 "reference": example["answer"],
                 "prediction": prediction,
